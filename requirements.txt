@@ -12,9 +12,9 @@ beautifulsoup4
 lxml
 
 # for HDFS support (requires environments variables JAVA_HOME and HADOOP_HOME):
-#pydoop
+pydoop # I have not installed hadoop yet, so I have not been able to pip install this package
 
 # to parse WARC/WAT/WET files using FastWARC (https://pypi.org/project/FastWARC/)
-#fastwarc
+fastwarc
 # (tested with)
 #fastwarc==0.14.1

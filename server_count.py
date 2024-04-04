@@ -18,6 +18,9 @@ class ServerCountJob(CCSparkJob):
         #   multiple (but unique) "Server" headers.
         # - WAT records store HTTP headers as JSON objects not preserving multiple
         #   headers, see https://github.com/commoncrawl/ia-web-commons/issues/18
+        
+        # Keyword for filtering
+        keyword = 'natural disaster'
 
         if self.is_wat_json_record(record):
             # WAT (response) record
@@ -31,7 +34,8 @@ class ServerCountJob(CCSparkJob):
                                              ['Server'] \
                                              .strip()
                         if server_name and server_name != '':
-                            yield server_name, 1
+                            if keyword in server_name.lower():
+                                yield server_name, 1
                         else:
                             yield ServerCountJob.fallback_server_name, 1
                     except KeyError:
@@ -55,7 +59,8 @@ class ServerCountJob(CCSparkJob):
                             "Not counting duplicated 'Server' header value for %s: %s",
                             self.get_warc_header(record, 'WARC-Target-URI'))
                     else:
-                        yield value, 1
+                        if keyword in server_name.lower():
+                            yield value, 1
                         server_names.add(value)
             if not server_names:
                 yield ServerCountJob.fallback_server_name, 1

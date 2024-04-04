@@ -368,6 +368,7 @@ class CCSparkJob(object):
 
     def process_record(self, record):
         """Process a single WARC/WAT/WET record"""
+        # Here add code to change processing of record
         raise NotImplementedError('Processing record needs to be customized')
 
     def iterate_records(self, _warc_uri, archive_iterator):

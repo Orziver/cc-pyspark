@@ -2,6 +2,12 @@ import ujson as json
 
 from sparkcc import CCSparkJob
 
+# In order to run file write: python file_name input output
+# file_name = server_count.py
+# input = crawl-data/CC-MAIN-2017-13/segments/1490218186353.38/wat
+# output = output.txt
+
+# & "$Env:SPARK_HOME/bin/spark-submit" ./server_count.py --num_output_partitions 1 --log_level WARN ./input/test_warc.txt servernames
 
 class ServerCountJob(CCSparkJob):
     """ Count server names sent in HTTP response header
